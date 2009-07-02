@@ -1,11 +1,15 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-# Time to add your specs!
-# http://rspec.info/
-describe "Place your specs here" do
-  
-  it "find this spec in spec directory" do
-    violated "Be sure to write your specs"
+describe EarthTools do
+  it "should have a version accessor" do
+    EarthTools.should respond_to(:version)
+    EarthTools.should respond_to(:version=)
   end
-  
+  it "should have a base uri accessor" do
+    EarthTools.should respond_to(:base_uri)
+    EarthTools.should respond_to(:base_uri=)
+  end
+  it "should set the base_uri to 'http://www.earthtools.org" do
+    EarthTools.base_uri.should == 'http://www.earthtools.org'
+  end
 end

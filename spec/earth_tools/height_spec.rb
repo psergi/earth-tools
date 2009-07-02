@@ -40,6 +40,9 @@ describe EarthTools::Height do
     it "should set the feet" do
       @height.feet.should == '462.6'
     end
+    it "should not shit if nil is passed" do
+      lambda { EarthTools::Height.new(nil) }.should_not raise_error
+    end
   end
 end
 

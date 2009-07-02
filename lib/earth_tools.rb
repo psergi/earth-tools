@@ -11,6 +11,7 @@ require 'earth_tools/sun/twilight'
 require 'earth_tools/sun/evening'
 require 'earth_tools/sun/morning'
 require 'earth_tools/sun'
+require 'earth_tools/timezone'
 
 module EarthTools
   VERSION = '0.0.1'

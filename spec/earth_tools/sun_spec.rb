@@ -34,25 +34,34 @@ describe EarthTools::Sun do
     it "should set the version" do
       @sun.version.should == '1.0'
     end
-    it "should parse the location" do
-      EarthTools::Location.should_receive(:new).with(@element['location']).and_return('location')
-      sun = EarthTools::Sun.new(@element)
-      sun.location.should == 'location'
-    end
-    it "should parse the date" do
-      EarthTools::Date.should_receive(:new).with(@element['date']).and_return('date')
-      sun = EarthTools::Sun.new(@element)
-      sun.date.should == 'date'
-    end
-    it "should parse the morning" do
-      EarthTools::Sun::Morning.should_receive(:new).with(@element['morning']).and_return('morning')
-      sun = EarthTools::Sun.new(@element)
-      sun.morning.should == 'morning'
-    end
-    it "should parse the evening" do
-      EarthTools::Sun::Evening.should_receive(:new).with(@element['evening']).and_return('evening')
-      sun = EarthTools::Sun.new(@element)
-      sun.evening.should == 'evening'
+    describe "complex attributes" do
+      before do
+        @element.stub!(:[])
+      end
+      it "should parse the location" do
+        @element.should_receive(:[]).with('location').and_return('location element')
+        EarthTools::Location.should_receive(:new).with('location element').and_return('location')
+        sun = EarthTools::Sun.new(@element)
+        sun.location.should == 'location'
+      end
+      it "should parse the date" do
+        @element.should_receive(:[]).with('date').and_return('date element')
+        EarthTools::Date.should_receive(:new).with('date element').and_return('date')
+        sun = EarthTools::Sun.new(@element)
+        sun.date.should == 'date'
+      end
+      it "should parse the morning" do
+        @element.should_receive(:[]).with('morning').and_return('morning element')
+        EarthTools::Sun::Morning.should_receive(:new).with('morning element').and_return('morning')
+        sun = EarthTools::Sun.new(@element)
+        sun.morning.should == 'morning'
+      end
+      it "should parse the evening" do
+        @element.should_receive(:[]).with('evening').and_return('evening element')
+        EarthTools::Sun::Evening.should_receive(:new).with('evening element').and_return('evening')
+        sun = EarthTools::Sun.new(@element)
+        sun.evening.should == 'evening'
+      end
     end
     it "should not shit if nil is passed" do
       lambda { EarthTools::Sun.new(nil) }.should_not raise_error

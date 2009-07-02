@@ -47,7 +47,9 @@ describe EarthTools::Timezone do
       @timezone.version.should == '1.1'
     end
     it "should parse the location" do
-      EarthTools::Location.should_receive(:new).with(@element['location']).and_return('location')
+      @element.stub!(:[])
+      @element.should_receive(:[]).with('location').and_return('location element')
+      EarthTools::Location.should_receive(:new).with('location element').and_return('location')
       timezone = EarthTools::Timezone.new(@element)
       timezone.location.should == 'location'
     end

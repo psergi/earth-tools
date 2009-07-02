@@ -23,7 +23,9 @@ describe EarthTools::Sun::Morning do
       @morning.sunrise.should == '07:05:34'
     end
     it "should parse the twilight" do
-      EarthTools::Sun::Twilight.should_receive(:new).with(@element['twilight']).and_return('twilight')
+      @element.stub!(:[])
+      @element.should_receive(:[]).with('twilight').and_return('twilight element')
+      EarthTools::Sun::Twilight.should_receive(:new).with('twilight element').and_return('twilight')
       morning = EarthTools::Sun::Morning.new(@element)
       morning.twilight.should == 'twilight'
     end

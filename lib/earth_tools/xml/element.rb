@@ -8,7 +8,9 @@ module EarthTools
       end
 
       def [](element)
-        @xml.at(element).text rescue nil
+        element = @xml.at(element)
+        return unless element
+        element.children.any? { |c| c.element? } ? EarthTools::XML::Element.new(element) : element.text
       end
     end
   end

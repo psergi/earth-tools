@@ -10,6 +10,7 @@ require 'earth_tools/height'
 require 'earth_tools/sun/twilight'
 require 'earth_tools/sun/evening'
 require 'earth_tools/sun/morning'
+require 'earth_tools/sun'
 
 module EarthTools
   VERSION = '0.0.1'

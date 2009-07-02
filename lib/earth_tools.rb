@@ -6,6 +6,7 @@ require 'nokogiri'
 require 'earth_tools/xml/element'
 require 'earth_tools/date'
 require 'earth_tools/location'
+require 'earth_tools/height'
 
 module EarthTools
   VERSION = '0.0.1'

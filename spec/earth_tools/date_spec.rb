@@ -38,5 +38,8 @@ describe EarthTools::Date do
     it "should set the dst" do
       @date.dst.should == '0'
     end
+    it "should not shit if nil is passed" do
+      lambda { EarthTools::Date.new(nil) }.should_not raise_error
+    end
   end
 end

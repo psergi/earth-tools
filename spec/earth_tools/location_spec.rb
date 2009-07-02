@@ -24,5 +24,8 @@ describe EarthTools::Location do
     it "should set the longitude" do
       @location.longitude.should == '-74.00639'
     end
+    it "should not shit if nil is passed" do
+      lambda { EarthTools::Location.new(nil) }.should_not raise_error
+    end
   end
 end

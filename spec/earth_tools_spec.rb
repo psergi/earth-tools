@@ -105,4 +105,32 @@ describe EarthTools do
       EarthTools.sun(:latitude => 1.1, :longitude => 2.1, :day => 1, :month => 12, :version => 1.0)
     end
   end
+
+  describe ".height" do
+    it "should do a get request to the height service" do
+      EarthTools.should_receive(:get).with('height', anything, anything, anything)
+      EarthTools.height('latitude' => '1.1', 'longitude' => '2.1')
+    end
+    it "should do a get request to the height service with the version when passed" do
+      EarthTools.should_receive(:get).with('height', '1.0', anything, anything)
+      EarthTools.height('latitude' => '1.1', 'longitude' => '2.1', 'version' => '1.0')
+    end
+    it "should pass the latitude and longitude to the get method in order" do
+      EarthTools.should_receive(:get).with('height', '1.0', '1.1', '2.1')
+      EarthTools.height('latitude' => '1.1', 'longitude' => '2.1', 'version' => '1.0')
+    end
+    it "should allow symbols as param keys" do
+      EarthTools.should_receive(:get).with('height', '1.0', '1.1', '2.1')
+      EarthTools.height(:latitude => '1.1', :longitude => '2.1', :version => '1.0')
+    end
+    it "should allow numbers as param values" do
+      EarthTools.should_receive(:get).with('height', '1.0', '1.1', '2.1')
+      EarthTools.height(:latitude => 1.1, :longitude => 2.1, :version => 1.0)
+    end
+    it "should return a height built from the get response" do
+      EarthTools.should_receive(:get).and_return('response')
+      EarthTools::Height.should_receive(:new).with('response').and_return('height')
+      EarthTools.height(:latitude => 1.1, :longitude => 2.1, :version => 1.0).should == 'height'
+    end
+  end
 end

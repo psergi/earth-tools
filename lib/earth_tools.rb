@@ -35,6 +35,12 @@ module EarthTools
     EarthTools::Sun.new(response)
   end
 
+  def self.height(params)
+    params = prepare_params(params)
+    response = self.get('height', params['version'], params['latitude'], params['longitude'])
+    EarthTools::Height.new(response)
+  end
+
   def self.get(service, version = nil, *params)
     service = versioned_service(service, version)
     response = open(File.join(self.base_uri, service, *params))

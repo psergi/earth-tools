@@ -15,7 +15,7 @@ require 'earth_tools/sun'
 require 'earth_tools/timezone'
 
 module EarthTools
-  VERSION = '0.0.1'
+  VERSION = '0.1.0'
 
   class << self
     attr_accessor :base_uri

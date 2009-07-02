@@ -8,6 +8,7 @@ require 'earth_tools/date'
 require 'earth_tools/location'
 require 'earth_tools/height'
 require 'earth_tools/sun/twilight'
+require 'earth_tools/sun/evening'
 
 module EarthTools
   VERSION = '0.0.1'

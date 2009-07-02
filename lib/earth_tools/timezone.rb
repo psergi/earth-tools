@@ -3,6 +3,7 @@ module EarthTools
     attr_accessor :version, :location, :offset, :suffix, :localtime, :isotime, :utctime, :dst
 
     def initialize(attrs = {})
+      attrs ||= {}
       @version = attrs['version']
       @location = EarthTools::Location.new(attrs['location'])
       @offset = attrs['offset']

@@ -69,5 +69,8 @@ describe EarthTools::Timezone do
     it "should set the dst" do
       @timezone.dst.should == 'False'
     end
+    it "should not shit if nil is passed" do
+      lambda { EarthTools::Timezone.new(nil) }.should_not raise_error
+    end
   end
 end

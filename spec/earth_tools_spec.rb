@@ -41,4 +41,68 @@ describe EarthTools do
       EarthTools.get('timezone').should == 'earth tools element'
     end
   end
+
+  describe ".timezone" do
+    it "should do a get request to the timezone service" do
+      EarthTools.should_receive(:get).with('timezone', anything, anything, anything)
+      EarthTools.timezone('latitude' => '1.1', 'longitude' => '2.1')
+    end
+    it "should do a get request to the timezone service with the version when passed" do
+      EarthTools.should_receive(:get).with('timezone', '1.0', anything, anything)
+      EarthTools.timezone('latitude' => '1.1', 'longitude' => '2.1', 'version' => '1.0')
+    end
+    it "should pass the latitude and longitude to the get method in order" do
+      EarthTools.should_receive(:get).with('timezone', '1.0', '1.1', '2.1')
+      EarthTools.timezone('latitude' => '1.1', 'longitude' => '2.1', 'version' => '1.0')
+    end
+    it "should allow symbols as param keys" do
+      EarthTools.should_receive(:get).with('timezone', '1.0', '1.1', '2.1')
+      EarthTools.timezone(:latitude => '1.1', :longitude => '2.1', :version => '1.0')
+    end
+    it "should allow numbers as param values" do
+      EarthTools.should_receive(:get).with('timezone', '1.0', '1.1', '2.1')
+      EarthTools.timezone(:latitude => 1.1, :longitude => 2.1, :version => 1.0)
+    end
+    it "should return a timezone built from the get response" do
+      EarthTools.should_receive(:get).and_return('response')
+      EarthTools::Timezone.should_receive(:new).with('response').and_return('timezone')
+      EarthTools.timezone(:latitude => 1.1, :longitude => 2.1, :version => 1.0).should == 'timezone'
+    end
+  end
+
+  describe ".sun" do
+    it "should do a get request to the sun service" do
+      EarthTools.should_receive(:get).with('sun', anything, anything, anything, anything, anything, anything, anything)
+      EarthTools.sun('latitude' => '1.1', 'longitude' => '2.1', 'day' => '1', 'month' => '12', 'timezone' => '-4', 'dst' => '0')
+    end
+    it "should do a get request to the sun service with the version when passed" do
+      EarthTools.should_receive(:get).with('sun', '1.0', anything, anything, anything, anything, anything, anything)
+      EarthTools.sun('latitude' => '1.1', 'longitude' => '2.1', 'day' => '1', 'month' => '12', 'timezone' => '-4', 'dst' => '0', 'version' => '1.0')
+    end
+    it "should pass the params to the get method in order" do
+      EarthTools.should_receive(:get).with('sun', '1.0', '1.1', '2.1', '1', '12', '-4', '0')
+      EarthTools.sun('latitude' => '1.1', 'longitude' => '2.1', 'day' => '1', 'month' => '12', 'timezone' => '-4', 'dst' => '0', 'version' => '1.0')
+    end
+    it "should allow symbols as param keys" do
+      EarthTools.should_receive(:get).with('sun', '1.0', '1.1', '2.1', '1', '12', '-4', '0')
+      EarthTools.sun(:latitude => '1.1', :longitude => '2.1', :day => '1', :month => '12', :timezone => '-4', :dst => '0', :version => '1.0')
+    end
+    it "should all numbers as param values" do
+      EarthTools.should_receive(:get).with('sun', '1.0', '1.1', '2.1', '1', '12', '-4', '0')
+      EarthTools.sun(:latitude => 1.1, :longitude => 2.1, :day => 1, :month => 12, :timezone => -4, :dst => 0, :version => 1.0)
+    end
+    it "should return a Sun built from the get response" do
+      EarthTools.should_receive(:get).and_return('response')
+      EarthTools::Sun.should_receive(:new).with('response').and_return('sun')
+      EarthTools.sun(:latitude => 1.1, :longitude => 2.1, :day => 1, :month => 12, :timezone => -4, :dst => 0, :version => 1.0).should == 'sun'
+    end
+    it "should default the timezone as '99' if not passed" do
+      EarthTools.should_receive(:get).with('sun', '1.0', '1.1', '2.1', '1', '12', '99', '0')
+      EarthTools.sun(:latitude => 1.1, :longitude => 2.1, :day => 1, :month => 12, :dst => 0, :version => 1.0)
+    end
+    it "should default the dst to '0' if not passed" do
+      EarthTools.should_receive(:get).with('sun', '1.0', '1.1', '2.1', '1', '12', '99', '0')
+      EarthTools.sun(:latitude => 1.1, :longitude => 2.1, :day => 1, :month => 12, :version => 1.0)
+    end
+  end
 end

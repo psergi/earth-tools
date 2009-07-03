@@ -3,10 +3,10 @@ require File.dirname(__FILE__) + '/lib/earth_tools'
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('earth_tools', EarthTools::VERSION) do |p|
+$hoe = Hoe.new('earth-tools', EarthTools::VERSION) do |p|
   p.developer('Phil Sergi', 'phil.sergi@gmail.com')
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  p.rubyforge_name       = p.name # TODO this is default value
+  p.rubyforge_name       = p.name
   p.extra_deps         = [
     ['nokogiri','>= 1.2.3'],
   ]
@@ -23,5 +23,4 @@ end
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
+task :default => [:spec]

@@ -1,0 +1,81 @@
+h1. earth-tools
+
+h2. What
+
+EarthTools.org Web Services Library
+
+h2. Installing
+
+<pre>sudo gem install earth-tools</pre>
+
+h2. Requirements
+
+* Nokogiri
+
+h2. Usage
+
+h3. Requiring
+
+<pre syntax="ruby">require 'earth_tools'</pre>
+
+h3. Current time given a latitude longitude
+
+<pre syntax="ruby">
+EarthTools.timezone({
+  :latitude => 42.3583333, 
+  :longitude => -71.0602778
+}).isotime
+
+=> "2009-07-02 18:28:37 -0500"
+</pre>
+
+h3. Timezone offset given a latitude longitude
+
+<pre syntax="ruby">
+EarthTools.timezone({
+  :latitude => 42.3583333, 
+  :longitude => -71.0602778
+}).offset
+
+=> "-5"
+</pre>
+
+h3. Sunrise time given a latitude longitude and date
+
+<pre syntax="ruby">
+EarthTools.sun({ 
+  :latitude => 42.3583333, 
+  :longitude => -71.0602778, 
+  :day => 1, 
+  :month => 10
+}).morning.sunrise
+
+=> "05:42:09"
+</pre>
+
+h3. Sunset time given a latitude longitude and date
+
+<pre syntax="ruby">
+EarthTools.sun({
+  :latitude => 42.3583333, 
+  :longitude => -71.0602778, 
+  :day => 1, 
+  :month => 10
+}).evening.sunset
+
+=> "17:24:15"
+</pre>
+
+h2. Links
+
+* "RDoc":http://earth-tools.rubyforge.org/rdoc
+* "EarthTools.org Web Services Documentation":http://www.earthtools.org/webservices.htm
+* "Github":http://github.com/psergi/earth-tools
+
+h2. Source
+
+<pre>git clone git://github.com/psergi/earth-tools.git</pre>
+
+h2. License
+
+This code is free to use under the terms of the MIT license. 

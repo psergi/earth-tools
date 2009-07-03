@@ -2,6 +2,7 @@ History.txt
 Manifest.txt
 README.rdoc
 Rakefile
+config/website.yml
 lib/earth_tools.rb
 lib/earth_tools/date.rb
 lib/earth_tools/height.rb
@@ -15,6 +16,7 @@ lib/earth_tools/xml/element.rb
 script/console
 script/destroy
 script/generate
+script/txt2html
 spec/earth_tools/date_spec.rb
 spec/earth_tools/height_spec.rb
 spec/earth_tools/location_spec.rb
@@ -28,3 +30,8 @@ spec/earth_tools_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake
+website/index.html
+website/index.txt
+website/javascripts/rounded_corners_lite.inc.js
+website/stylesheets/screen.css
+website/template.html.erb
